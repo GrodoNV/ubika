@@ -1,24 +1,44 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/Button';
+import FeatureCard from '../components/FeatureCard';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-blue-900 to-gray-900 text-white">
+      {/* Navbar */}
+      <nav className="container mx-auto px-4 py-6 flex justify-between items-center">
+        <div className="text-2xl font-bold">Ubika</div>
+        <div className="flex gap-4">
+          <Button variant="outline" onClick={() => navigate('/mapa')}>Ver Mapa</Button>
+          <Button onClick={() => navigate('/registrar-negocio')}>Registrar Negocio</Button>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Bienvenido a <span className="text-blue-500">Ubika</span>
+            Conectando <span className="text-blue-400">Transporte</span> y <span className="text-blue-400">Comunidad</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-300">
-            Tu solución integral para la gestión de recursos
+          <p className="text-xl md:text-2xl mb-8 text-gray-300 max-w-2xl">
+            La plataforma que une a conductores y pasajeros de manera segura y eficiente en La Paz
           </p>
-          <div className="flex gap-4">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Comenzar
-            </button>
-            <button className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-              Saber más
-            </button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button onClick={() => navigate('/mapa')}>Ver Mapa en Tiempo Real</Button>
+            <Button variant="secondary" onClick={() => navigate('/registrar-negocio')}>Registrar Mi Negocio</Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Preview Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8">
+          <h2 className="text-3xl font-bold mb-6">Mapa en Tiempo Real</h2>
+          <div className="aspect-video bg-gray-800 rounded-lg flex items-center justify-center">
+            <p className="text-gray-400">Mapa interactivo aquí</p>
           </div>
         </div>
       </section>
@@ -26,47 +46,53 @@ const Home = () => {
       {/* Features Section */}
       <section className="container mx-auto px-4 py-20">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Nuestras Características
+          ¿Por qué elegir Ubika?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-gray-800 p-6 rounded-lg">
-            <div className="text-blue-500 text-4xl mb-4">🚀</div>
-            <h3 className="text-xl font-bold mb-2">Rápido y Eficiente</h3>
-            <p className="text-gray-300">
-              Optimiza tus procesos con nuestra plataforma de alta velocidad
-            </p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-lg">
-            <div className="text-blue-500 text-4xl mb-4">🔒</div>
-            <h3 className="text-xl font-bold mb-2">Seguro y Confiable</h3>
-            <p className="text-gray-300">
-              Tus datos están protegidos con la más alta seguridad
-            </p>
-          </div>
-          <div className="bg-gray-800 p-6 rounded-lg">
-            <div className="text-blue-500 text-4xl mb-4">📊</div>
-            <h3 className="text-xl font-bold mb-2">Analíticas Avanzadas</h3>
-            <p className="text-gray-300">
-              Toma decisiones basadas en datos en tiempo real
-            </p>
-          </div>
+          <FeatureCard
+            icon="🚗"
+            title="Transporte Seguro"
+            description="Conductores verificados y rutas optimizadas para tu seguridad"
+          />
+          <FeatureCard
+            icon="💰"
+            title="Precios Justos"
+            description="Tarifas transparentes y sin sorpresas"
+          />
+          <FeatureCard
+            icon="⏱️"
+            title="Tiempo Real"
+            description="Seguimiento en vivo de tu transporte"
+          />
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Business Registration CTA */}
       <section className="container mx-auto px-4 py-20">
-        <div className="bg-blue-600 rounded-2xl p-8 text-center">
+        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            ¿Listo para comenzar?
+            ¿Eres conductor o tienes un negocio de transporte?
           </h2>
           <p className="text-xl mb-8 text-blue-100">
-            Únete a nuestra plataforma y transforma tu negocio hoy mismo
+            Únete a nuestra plataforma y llega a más pasajeros
           </p>
-          <button className="bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition duration-300">
+          <Button variant="outline" className="bg-white text-blue-600 hover:bg-blue-50">
             Registrarse Ahora
-          </button>
+          </Button>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="container mx-auto px-4 py-8 border-t border-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="text-xl font-bold mb-4 md:mb-0">Ubika</div>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-blue-400 transition-colors">Términos</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Privacidad</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">Contacto</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
