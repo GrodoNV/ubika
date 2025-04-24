@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import FeatureCard from '../components/FeatureCard';
-import TestimonialCard from '../components/TestimonialCard';
 import Map from '../components/Map';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [activeFilters, setActiveFilters] = useState({
+    pumakatari: false,
+    camionGarrafas: false,
+    miUbicacion: false
+  });
+  const [locationStatus, setLocationStatus] = useState('');
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-blue-900 to-gray-900 text-white">
@@ -39,7 +44,12 @@ const Home = () => {
       <section className="container mx-auto px-4 py-20">
         <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8">
           <h2 className="text-3xl font-bold mb-6">Mapa en Tiempo Real</h2>
-          <Map />
+          <div className="h-[500px] rounded-lg overflow-hidden">
+            <Map 
+              activeFilters={activeFilters}
+              onLocationStatusChange={setLocationStatus}
+            />
+          </div>
         </div>
       </section>
 
@@ -67,38 +77,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonios Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Lo que dicen nuestros clientes</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Descubre las experiencias de quienes ya confían en nuestra plataforma
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <TestimonialCard
-              name="María González"
-              role="Dueña de Restaurante"
-              image="/images/testimonials/maria.jpg"
-              content="Gracias a Ubika, he podido aumentar la visibilidad de mi negocio y atraer más clientes. La plataforma es muy fácil de usar y el soporte es excelente."
-            />
-            <TestimonialCard
-              name="Carlos Rodríguez"
-              role="Gerente de Hotel"
-              image="/images/testimonials/carlos.jpg"
-              content="La integración con Google Maps ha sido fundamental para nuestro negocio. Ahora los clientes nos encuentran más fácilmente y las reservas han aumentado significativamente."
-            />
-            <TestimonialCard
-              name="Ana Martínez"
-              role="Emprendedora"
-              image="/images/testimonials/ana.jpg"
-              content="Como emprendedora, necesitaba una solución que me ayudara a destacar en el mercado. Ubika ha sido la herramienta perfecta para dar a conocer mi negocio."
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Business Registration CTA */}
       <section className="container mx-auto px-4 py-20">
         <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-center">
@@ -108,7 +86,7 @@ const Home = () => {
           <p className="text-xl mb-8 text-blue-100">
             Únete a nuestra plataforma y llega a más pasajeros
           </p>
-          <Button variant="outline" className="bg-white text-blue-600 hover:bg-blue-50">
+          <Button variant="outline" className="bg-white text-blue-600 hover:bg-blue-50" onClick={() => navigate('/registrar-negocio')}>
             Registrarse Ahora
           </Button>
         </div>

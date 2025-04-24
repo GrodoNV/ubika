@@ -6,7 +6,7 @@ import MapPage from './pages/MapPage';
 import RegisterBusiness from './pages/RegisterBusiness';
 
 function App() {
-    return (
+  return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -14,8 +14,8 @@ function App() {
         <Route path="/registrar-negocio" element={<RegisterBusiness />} />
       </Routes>
     </Router>
-    );
-  }
+  );
+}
 
 export default App;
   
